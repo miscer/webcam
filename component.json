@@ -1,0 +1,13 @@
+{
+  "name": "webcam",
+  "repo": "michalmiskernik/webcam",
+  "description": "Capture video from webcam",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js"
+  ]
+}
