@@ -6,12 +6,17 @@ var getUserMedia =
   navigator.mozGetUserMedia ||
   navigator.msGetUserMedia;
 
-module.exports = function(opts) {
+exports.record = function(success, fail) {
   var video = document.createElement('video');
-  video.autoplay = true;
 
-  getUserMedia.call(navigator, {video: true}, function(stream) {
+  video.addEventListener('canplay', function() {
+    success(video);
+  });
+
+  getUserMedia.call(navigator, { video: true }, function(stream) {
     video.src = URL.createObjectURL(stream);
-    opts.success(video);
-  }, opts.fail);
+    video.play();
+  }, fail);
 };
+
+exports.supported = !!getUserMedia && !!URL;

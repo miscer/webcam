@@ -3,24 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title>Webcam</title>
-    <script src="build/build.js"></script>
   </head>
   <body>
     <div id="container"></div>
 
+    <script src="build/build.js"></script>
     <script>
       var webcam = require('webcam'),
           container = document.querySelector('#container');
 
-      webcam({
-        success: function(video) {
+      if (!webcam.supported) {
+        alert('no support for webcam recording :(');
+      }
+
+      webcam.record(
+        function(video) {
           container.appendChild(video);
         },
 
-        fail: function() {
-          alert('permission not granted :(');
+        function(error) {
+          alert('permission not given :(');
+          console.log(error);
         }
-      });
+      );
     </script>
   </body>
 </html>
